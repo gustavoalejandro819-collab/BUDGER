@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUDGER | Hamburguesería a Domicilio</title>
+    <!-- FontAwesome para Íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Encabezado / Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-burger burger-icon"></i>
+                <span class="logo-text">BUD<span class="highlight">GER</span></span>
+            </div>
+            
+            <div class="delivery-badge">
+                <i class="fa-solid fa-motorcycle"></i>
+                <span>Solo Envíos a Domicilio</span>
+            </div>
+
+            <button class="cart-btn" id="openCartBtn" aria-label="Ver Carrito">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cartBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Banner Hero -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle">⚡ ¡100% Hamburguesas Calientes en tu Puerta!</span>
+            <h1>LAS MEJORES BURGERS DE LA CIUDAD</h1>
+            <p>Elegí tus medallones, quitá los ingredientes que no te gusten y recibilo directo en tu casa.</p>
+            <a href="#menu" class="btn-primary"><i class="fa-solid fa-utensils"></i> Ver Menú</a>
+        </div>
+    </section>
+
+    <!-- Sección de Menú -->
+    <main class="main-container" id="menu">
+        <!-- Filtros por Categoría -->
+        <nav class="categories">
+            <button class="cat-btn active" data-category="todos">
+                <i class="fa-solid fa-border-all"></i> Todas
+            </button>
+            <button class="cat-btn" data-category="simples">
+                <i class="fa-solid fa-burger"></i> Simples
+            </button>
+            <button class="cat-btn" data-category="dobles">
+                <i class="fa-solid fa-layer-group"></i> Dobles
+            </button>
+            <button class="cat-btn" data-category="triples">
+                <i class="fa-solid fa-cubes"></i> Triples
+            </button>
+            <button class="cat-btn" data-category="cuadruples">
+                <i class="fa-solid fa-fire"></i> Cuádruples
+            </button>
+        </nav>
+
+        <!-- Grid de Productos -->
+        <section class="menu-grid" id="menuGrid">
+            <!-- Se renderizan dinámicamente con JS -->
+        </section>
+    </main>
+
+    <!-- Modal de Personalización (Quitar Ingredientes) -->
+    <div class="modal-overlay" id="customizeModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeCustomizeModal">&times;</button>
+            <div class="modal-header">
+                <h3 id="modalBurgerName">Hamburguesa</h3>
+                <p class="modal-desc" id="modalBurgerDesc"></p>
+            </div>
+            
+            <div class="modal-body">
+                <h4><i class="fa-solid fa-sliders"></i> Personalizá tus ingredientes:</h4>
+                <p class="sub-instruction">Desmarcá los ingredientes que querés <strong>QUITAR</strong> de tu burger:</p>
+                <div class="ingredients-list" id="modalIngredientsList">
+                    <!-- Checkboxes de ingredientes dinámicos -->
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-price" id="modalPrice">$0</div>
+                <button class="btn-add-cart" id="confirmAddToCartBtn">
+                    <i class="fa-solid fa-plus"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Drawer del Carrito -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Tu Pedido</h3>
+            <button class="close-cart" id="closeCartBtn">&times;</button>
+        </div>
+
+        <div class="cart-items" id="cartItemsContainer">
+            <!-- Items del carrito -->
+        </div>
+
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-summary">
+                <div class="summary-row total">
+                    <span>Total a Pagar:</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+            </div>
+
+            <form id="checkoutForm" class="checkout-form">
+                <h4><i class="fa-solid fa-truck-ram"></i> Datos para el Envío</h4>
+                <div class="form-group">
+                    <input type="text" id="custName" placeholder="Tu Nombre y Apellido" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="custAddress" placeholder="Dirección Exacta (Calle, Altura, Dpto)" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="custNotes" placeholder="Aclaraciones de envío (Ej: Timbre B, Entre Calles...)">
+                </div>
+                <div class="form-group">
+                    <select id="custPayment" required>
+                        <option value="" disabled selected>Método de Pago</option>
+                        <option value="Efectivo contra entrega">Efectivo contra entrega</option>
+                        <option value="Transferencia / MP">Transferencia Bancaria / Mercado Pago</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-checkout">
+                    <i class="fa-brands fa-whatsapp"></i> Confirmar y Enviar Pedido
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- Botón Flotante de Instagram -->
+    <a href="https://www.instagram.com/budger.ok/" target="_blank" rel="noopener noreferrer" class="instagram-float" aria-label="Visitar Instagram">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- JS Externo -->
+    <script src="script.js"></script>
+</body>
+</html>
